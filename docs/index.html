@@ -1,495 +1,661 @@
+
 <!DOCTYPE html>
-<!-- saved from url=(0066)file:///C:/Users/Mosta/Downloads/medical-chatbot-presentation.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Chatbot GenAI - Mostafa M. Hussein</title>
     <style>
-        @page {
-            size: 11in 8.5in;
-            margin: 0;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
         }
         
-        .slide {
-            width: 11in;
-            height: 8.5in;
-            page-break-after: always;
-            position: relative;
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Hero Section */
+        .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 60px;
-            display: flex;
-            flex-direction: column;
+            padding: 60px 20px;
+            text-align: center;
+            width: 100%;
         }
         
-        .slide-white {
-            background: white;
-            color: #1e293b;
-        }
-        
-        .header {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            font-size: 12px;
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .slide-white .header {
-            color: #94a3b8;
-        }
-        
-        h1 {
-            font-size: 56px;
-            color: white;
+        .hero h1 {
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 800;
             margin-bottom: 20px;
-            font-weight: 700;
+            color: white;
         }
         
-        h2 {
-            font-size: 42px;
-            color: #1e293b;
+        .hero .subtitle {
+            font-size: clamp(16px, 4vw, 24px);
             margin-bottom: 30px;
-            font-weight: 700;
+            color: rgba(255,255,255,0.95);
         }
         
-        h3 {
-            font-size: 28px;
-            color: #334155;
-            margin-bottom: 15px;
-            font-weight: 600;
+        .hero .github-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: clamp(14px, 3vw, 18px);
+            margin-top: 20px;
+            transition: background 0.3s;
         }
         
-        .subtitle {
-            font-size: 24px;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 40px;
+        .hero .github-link:hover {
+            background: rgba(255,255,255,0.3);
         }
         
         .author {
-            font-size: 20px;
-            color: rgba(255,255,255,0.8);
-            margin-top: auto;
+            margin-top: 40px;
+            font-size: clamp(16px, 3.5vw, 20px);
+            color: rgba(255,255,255,0.9);
         }
         
-        .content-box {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 15px 0;
-            border-left: 5px solid #667eea;
+        .author strong {
+            font-size: clamp(20px, 5vw, 28px);
+            display: block;
+            margin-bottom: 10px;
         }
         
+        /* Section Styles */
+        .section {
+            padding: 40px 20px;
+            background: #1e293b;
+            margin: 0;
+            width: 100%;
+        }
+        
+        .section-alt {
+            background: #0f172a;
+        }
+        
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .section h2 {
+            font-size: clamp(28px, 6vw, 42px);
+            margin-bottom: 30px;
+            color: #60a5fa;
+            border-bottom: 3px solid #60a5fa;
+            padding-bottom: 15px;
+        }
+        
+        .section h3 {
+            font-size: clamp(20px, 4vw, 28px);
+            margin: 30px 0 15px 0;
+            color: #34d399;
+        }
+        
+        /* Tech Grid */
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+            width: 100%;
         }
         
         .tech-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
+            padding: 25px 15px;
+            border-radius: 12px;
             text-align: center;
+            font-size: clamp(14px, 3vw, 18px);
             font-weight: 600;
-            font-size: 16px;
+            color: white;
+            transition: transform 0.3s;
         }
         
-        .phase-box {
-            background: #f1f5f9;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 6px solid #10b981;
+        .tech-card:hover {
+            transform: translateY(-5px);
         }
         
-        .phase-title {
-            font-size: 24px;
-            color: #10b981;
-            font-weight: 700;
-            margin-bottom: 15px;
+        .tech-card .emoji {
+            font-size: clamp(24px, 6vw, 40px);
+            margin-bottom: 10px;
+            display: block;
         }
         
-        ul {
-            margin-left: 25px;
-            line-height: 1.8;
-        }
-        
-        li {
-            margin: 10px 0;
-            font-size: 18px;
-            color: #475569;
-        }
-        
-        .highlight {
-            background: #fef3c7;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-        
-        .architecture-flow {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Architecture Flow */
+        .arch-container {
+            background: #334155;
+            padding: 30px 20px;
+            border-radius: 12px;
             margin: 30px 0;
+            width: 100%;
+        }
+        
+        .flow-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .flow-box {
             background: #667eea;
             color: white;
-            padding: 20px;
+            padding: 20px 15px;
             border-radius: 10px;
             text-align: center;
-            width: 22%;
-            font-size: 14px;
+            flex: 1 1 140px;
+            max-width: 200px;
+            min-width: 120px;
+            font-size: clamp(12px, 2.5vw, 14px);
+        }
+        
+        .flow-box .emoji {
+            font-size: clamp(20px, 5vw, 32px);
+            display: block;
+            margin-bottom: 10px;
         }
         
         .arrow {
-            font-size: 32px;
-            color: #667eea;
+            font-size: clamp(24px, 5vw, 32px);
+            color: #60a5fa;
+            flex-shrink: 0;
         }
         
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            left: 40px;
-            right: 40px;
+        .down-arrow {
             text-align: center;
-            font-size: 12px;
-            color: #94a3b8;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 10px;
+            font-size: clamp(32px, 7vw, 48px);
+            color: #60a5fa;
+            margin: 20px 0;
         }
         
-        code {
-            background: #1e293b;
+        /* Phase Boxes */
+        .phase-box {
+            background: #334155;
+            padding: 25px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 6px solid #10b981;
+            width: 100%;
+        }
+        
+        .phase-box h3 {
             color: #10b981;
-            padding: 2px 8px;
+            margin-top: 0;
+        }
+        
+        .phase-box ul {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+        
+        .phase-box li {
+            margin: 12px 0;
+            font-size: clamp(14px, 3vw, 18px);
+        }
+        
+        /* Code Blocks */
+        code {
+            background: #0f172a;
+            color: #34d399;
+            padding: 3px 8px;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
-            font-size: 14px;
+            font-size: clamp(12px, 2.5vw, 15px);
+            word-break: break-word;
         }
         
+        pre {
+            background: #0f172a;
+            color: #34d399;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #34d399;
+            font-size: clamp(12px, 2.5vw, 14px);
+        }
+        
+        /* Result Boxes */
         .result-box {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
-            padding: 30px;
+            padding: 25px 20px;
             border-radius: 12px;
-            margin: 20px 0;
             text-align: center;
-            font-size: 20px;
+            font-size: clamp(16px, 3.5vw, 20px);
             font-weight: 600;
+            margin: 30px 0;
+            width: 100%;
         }
-
-        @media print {
-            .slide {
-                page-break-after: always;
+        
+        .result-box .sub {
+            font-size: clamp(14px, 3vw, 16px);
+            margin-top: 10px;
+            opacity: 0.95;
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            width: 100%;
+        }
+        
+        .skill-card {
+            background: #334155;
+            padding: 25px 20px;
+            border-radius: 12px;
+            border-left: 6px solid #8b5cf6;
+        }
+        
+        .skill-card h3 {
+            color: #8b5cf6;
+            margin-top: 0;
+        }
+        
+        .skill-card ul {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+        
+        .skill-card li {
+            margin: 10px 0;
+            font-size: clamp(14px, 3vw, 16px);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            padding: 40px 20px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .footer h2 {
+            font-size: clamp(32px, 7vw, 48px);
+            color: white;
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .contact-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid #667eea;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin: 40px auto;
+            max-width: 600px;
+        }
+        
+        .contact-box p {
+            font-size: clamp(16px, 3.5vw, 20px);
+            margin: 15px 0;
+            color: #e2e8f0;
+            word-break: break-word;
+        }
+        
+        .contact-box a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Lists */
+        ul {
+            list-style-type: none;
+        }
+        
+        li:before {
+            content: "▸ ";
+            color: #60a5fa;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        strong {
+            color: #60a5fa;
+        }
+        
+        p {
+            font-size: clamp(14px, 3vw, 18px);
+        }
+        
+        /* Mobile specific */
+        @media (max-width: 768px) {
+            .flow-row {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+            
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- Slide 1: Title -->
-<div class="slide">
-    <div class="header">AI Lead Position - Portfolio Project</div>
-    <h1>Medical Chatbot GenAI</h1>
-    <p class="subtitle">Production-Ready RAG System with Full CI/CD Pipeline</p>
-    <p class="subtitle" style="font-size: 20px; margin-top: 60px;">
-        🔗 GitHub Repository: <span style="background: rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 5px;">
-        github.com/MostafaMhussein/Medical-Chatbot-GenAI</span>
-    </p>
-    <div class="author">
-        <p style="font-size: 28px; margin-bottom: 10px;">Mostafa M. Hussein</p>
-        <p>mustafa.m.hussien@hotmail.com</p>
+<!-- Hero Section -->
+<div class="hero">
+    <div class="container">
+        <h1>Medical Chatbot GenAI</h1>
+        <p class="subtitle">Production-Ready RAG System with Full CI/CD Pipeline</p>
+        <a href="https://github.com/MostafaMhussein/Medical-Chatbot-GenAI" class="github-link" target="_blank">
+            🔗 View on GitHub
+        </a>
+        <div class="author">
+            <strong>Mostafa M. Hussein</strong>
+            AI Lead Position - Portfolio Project<br>
+            📧 mustafa.m.hussien@hotmail.com
+        </div>
     </div>
 </div>
 
-<!-- Slide 2: Project Overview -->
-<div class="slide slide-white">
-    <div class="header">Project Overview</div>
-    <h2>🎯 Project Objective</h2>
-    <div class="content-box">
-        <h3>What is this project?</h3>
-        <p style="font-size: 20px; line-height: 1.8; color: #475569;">
-            An <span class="highlight">enterprise-grade medical chatbot</span> that uses Retrieval-Augmented Generation (RAG) 
+<!-- Project Overview -->
+<div class="section">
+    <div class="section-content">
+        <h2>🎯 Project Overview</h2>
+        <p style="margin-bottom: 20px;">
+            An <strong>enterprise-grade medical chatbot</strong> that uses Retrieval-Augmented Generation (RAG) 
             to provide accurate medical information by combining:
         </p>
-        <ul>
+        <ul style="margin-left: 20px;">
             <li><strong>Custom medical knowledge base</strong> from PDF documents</li>
             <li><strong>OpenAI GPT</strong> for natural language understanding and generation</li>
             <li><strong>Vector similarity search</strong> for intelligent context retrieval</li>
             <li><strong>Modern web interface</strong> styled like ChatGPT</li>
         </ul>
+        <div class="result-box" style="margin-top: 40px;">
+            ✅ Result: AI assistant that answers medical questions based on verified documents, not hallucinations
+        </div>
     </div>
-    <div class="result-box">
-        ✅ Result: AI assistant that answers medical questions based on verified documents, not hallucinations
-    </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
 </div>
 
-<!-- Slide 3: Technology Stack -->
-<div class="slide slide-white">
-    <div class="header">Technology Stack</div>
-    <h2>🛠️ Technologies Used</h2>
-    <div class="tech-grid">
-        <div class="tech-card">
-            <div style="font-size: 32px; margin-bottom: 10px;">🐍</div>
-            Python 3.10
+<!-- Technology Stack -->
+<div class="section section-alt">
+    <div class="section-content">
+        <h2>🛠️ Technology Stack</h2>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <span class="emoji">🐍</span>
+                Python 3.10
+            </div>
+            <div class="tech-card">
+                <span class="emoji">🦜</span>
+                LangChain
+            </div>
+            <div class="tech-card">
+                <span class="emoji">🤖</span>
+                OpenAI GPT
+            </div>
+            <div class="tech-card">
+                <span class="emoji">🌲</span>
+                Pinecone DB
+            </div>
+            <div class="tech-card">
+                <span class="emoji">🤗</span>
+                HuggingFace
+            </div>
+            <div class="tech-card">
+                <span class="emoji">🌐</span>
+                Flask
+            </div>
+            <div class="tech-card">
+                <span class="emoji">🐳</span>
+                Docker
+            </div>
+            <div class="tech-card">
+                <span class="emoji">☁️</span>
+                AWS EC2/ECR
+            </div>
         </div>
-        <div class="tech-card">
-            <div style="font-size: 32px; margin-bottom: 10px;">🦜</div>
-            LangChain
-        </div>
-        <div class="tech-card">
-            <div style="font-size: 32px; margin-bottom: 10px;">🤖</div>
-            OpenAI GPT
-        </div>
-        <div class="tech-card">
-            <div style="font-size: 32px; margin-bottom: 10px;">🌲</div>
-            Pinecone DB
-        </div>
-        <div class="tech-card">
-            <div style="font-size: 32px; margin-bottom: 10px;">🤗</div>
-            HuggingFace
-        </div>
-        <div class="tech-card">
-            <div style="font-size: 32px; margin-bottom: 10px;">🌐</div>
-            Flask
-        </div>
-        <div class="tech-card">
-            <div style="font-size: 32px; margin-bottom: 10px;">🐳</div>
-            Docker
-        </div>
-        <div class="tech-card">
-            <div style="font-size: 32px; margin-bottom: 10px;">☁️</div>
-            AWS EC2/ECR
-        </div>
-    </div>
-    <div class="content-box" style="margin-top: 40px;">
+        
         <h3>Key Technical Highlights</h3>
-        <ul>
+        <ul style="margin-left: 20px;">
             <li><strong>Vector Embeddings:</strong> sentence-transformers/all-MiniLM-L6-v2 (384 dimensions)</li>
             <li><strong>Deployment:</strong> Automated CI/CD with GitHub Actions</li>
             <li><strong>Infrastructure:</strong> Containerized deployment on AWS cloud</li>
             <li><strong>Architecture:</strong> Production-ready RAG pattern</li>
         </ul>
     </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
 </div>
 
-<!-- Slide 4: System Architecture -->
-<div class="slide slide-white">
-    <div class="header">System Architecture</div>
-    <h2>🏗️ High-Level Architecture</h2>
-    <div class="architecture-flow">
-        <div class="flow-box">
-            <div style="font-size: 24px; margin-bottom: 10px;">📄</div>
-            <strong>Medical PDFs</strong><br>
-            Source documents
+<!-- System Architecture -->
+<div class="section">
+    <div class="section-content">
+        <h2>🏗️ System Architecture</h2>
+        
+        <div class="arch-container">
+            <h3 style="text-align: center; color: #60a5fa; margin-bottom: 30px;">Data Preparation Pipeline</h3>
+            <div class="flow-row">
+                <div class="flow-box">
+                    <span class="emoji">📄</span>
+                    <strong>Medical PDFs</strong><br>
+                    Source documents
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-box">
+                    <span class="emoji">✂️</span>
+                    <strong>Text Chunking</strong><br>
+                    Split & Process
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-box">
+                    <span class="emoji">🧠</span>
+                    <strong>Embeddings</strong><br>
+                    Vector conversion
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-box">
+                    <span class="emoji">🗄️</span>
+                    <strong>Pinecone</strong><br>
+                    Vector storage
+                </div>
+            </div>
+            
+            <div class="down-arrow">⬇️</div>
+            
+            <h3 style="text-align: center; color: #34d399; margin: 30px 0;">Query Processing Pipeline</h3>
+            <div class="flow-row">
+                <div class="flow-box">
+                    <span class="emoji">❓</span>
+                    <strong>User Query</strong><br>
+                    Web interface
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-box">
+                    <span class="emoji">🔍</span>
+                    <strong>Search</strong><br>
+                    Find relevant docs
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-box">
+                    <span class="emoji">🤖</span>
+                    <strong>GPT</strong><br>
+                    Generate answer
+                </div>
+                <span class="arrow">→</span>
+                <div class="flow-box">
+                    <span class="emoji">💬</span>
+                    <strong>Response</strong><br>
+                    Display to user
+                </div>
+            </div>
         </div>
-        <div class="arrow">→</div>
-        <div class="flow-box">
-            <div style="font-size: 24px; margin-bottom: 10px;">✂️</div>
-            <strong>Text Chunking</strong><br>
-            Split &amp; Process
-        </div>
-        <div class="arrow">→</div>
-        <div class="flow-box">
-            <div style="font-size: 24px; margin-bottom: 10px;">🧠</div>
-            <strong>Embeddings</strong><br>
-            Vector conversion
-        </div>
-        <div class="arrow">→</div>
-        <div class="flow-box">
-            <div style="font-size: 24px; margin-bottom: 10px;">🗄️</div>
-            <strong>Pinecone</strong><br>
-            Vector storage
-        </div>
-    </div>
-    
-    <div style="text-align: center; margin: 30px 0; font-size: 24px; color: #667eea;">⬇️</div>
-    
-    <div class="architecture-flow">
-        <div class="flow-box">
-            <div style="font-size: 24px; margin-bottom: 10px;">❓</div>
-            <strong>User Query</strong><br>
-            Web interface
-        </div>
-        <div class="arrow">→</div>
-        <div class="flow-box">
-            <div style="font-size: 24px; margin-bottom: 10px;">🔍</div>
-            <strong>Search</strong><br>
-            Find relevant docs
-        </div>
-        <div class="arrow">→</div>
-        <div class="flow-box">
-            <div style="font-size: 24px; margin-bottom: 10px;">🤖</div>
-            <strong>GPT</strong><br>
-            Generate answer
-        </div>
-        <div class="arrow">→</div>
-        <div class="flow-box">
-            <div style="font-size: 24px; margin-bottom: 10px;">💬</div>
-            <strong>Response</strong><br>
-            Display to user
-        </div>
-    </div>
-    
-    <div class="content-box" style="margin-top: 40px;">
-        <p style="font-size: 18px; color: #475569; line-height: 1.8;">
+        
+        <p style="margin-top: 30px; padding: 20px; background: #334155; border-radius: 8px;">
             <strong>RAG Pattern:</strong> Combines the power of large language models with domain-specific knowledge retrieval 
             to provide accurate, contextual responses grounded in actual medical documentation.
         </p>
     </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
 </div>
 
-<!-- Slide 5: Phase 1 - Data Preparation -->
-<div class="slide slide-white">
-    <div class="header">Implementation Details - Phase 1</div>
-    <h2>📊 Phase 1: Data Preparation &amp; Indexing</h2>
-    
-    <div class="phase-box">
-        <div class="phase-title">Step 1: Document Loading</div>
-        <ul>
-            <li>Medical PDFs stored in <code>data/</code> folder</li>
-            <li>LangChain's <code>PyPDFLoader</code> extracts text content</li>
-            <li>Handles multiple documents automatically</li>
-        </ul>
+<!-- Phase 1 -->
+<div class="section section-alt">
+    <div class="section-content">
+        <h2>📊 Phase 1: Data Preparation & Indexing</h2>
+        
+        <div class="phase-box">
+            <h3>Step 1: Document Loading</h3>
+            <ul>
+                <li>Medical PDFs stored in <code>data/</code> folder</li>
+                <li>LangChain's <code>PyPDFLoader</code> extracts text content</li>
+                <li>Handles multiple documents automatically</li>
+            </ul>
+        </div>
+        
+        <div class="phase-box">
+            <h3>Step 2: Text Chunking</h3>
+            <ul>
+                <li><code>RecursiveCharacterTextSplitter</code> breaks documents into manageable chunks</li>
+                <li>Maintains context between chunks for better retrieval</li>
+                <li>Optimized chunk size for embedding model</li>
+            </ul>
+        </div>
+        
+        <div class="phase-box">
+            <h3>Step 3: Embedding Generation</h3>
+            <ul>
+                <li>HuggingFace model: <code>sentence-transformers/all-MiniLM-L6-v2</code></li>
+                <li>Converts text to 384-dimensional vectors</li>
+                <li>Captures semantic meaning for similarity search</li>
+            </ul>
+        </div>
+        
+        <div class="phase-box">
+            <h3>Step 4: Vector Storage</h3>
+            <ul>
+                <li>Upload embeddings to Pinecone vector database</li>
+                <li>Create searchable index for fast retrieval</li>
+                <li>Execute: <code>python store_index.py</code></li>
+            </ul>
+        </div>
     </div>
-    
-    <div class="phase-box">
-        <div class="phase-title">Step 2: Text Chunking</div>
-        <ul>
-            <li><code>RecursiveCharacterTextSplitter</code> breaks documents into manageable chunks</li>
-            <li>Maintains context between chunks for better retrieval</li>
-            <li>Optimized chunk size for embedding model</li>
-        </ul>
-    </div>
-    
-    <div class="phase-box">
-        <div class="phase-title">Step 3: Embedding Generation</div>
-        <ul>
-            <li>HuggingFace model: <code>sentence-transformers/all-MiniLM-L6-v2</code></li>
-            <li>Converts text to 384-dimensional vectors</li>
-            <li>Captures semantic meaning for similarity search</li>
-        </ul>
-    </div>
-    
-    <div class="phase-box">
-        <div class="phase-title">Step 4: Vector Storage</div>
-        <ul>
-            <li>Upload embeddings to Pinecone vector database</li>
-            <li>Create searchable index for fast retrieval</li>
-            <li>Execute: <code>python store_index.py</code></li>
-        </ul>
-    </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
 </div>
 
-<!-- Slide 6: Phase 2 - Application Runtime -->
-<div class="slide slide-white">
-    <div class="header">Implementation Details - Phase 2</div>
-    <h2>⚡ Phase 2: Application Runtime</h2>
-    
-    <div class="phase-box" style="border-left-color: #3b82f6;">
-        <div class="phase-title" style="color: #3b82f6;">User Interaction Flow</div>
-        <ul>
-            <li><strong>Interface:</strong> ChatGPT-style web UI built with Flask</li>
-            <li><strong>User Input:</strong> Natural language medical questions</li>
-            <li><strong>Real-time processing:</strong> Immediate response generation</li>
-        </ul>
+<!-- Phase 2 -->
+<div class="section">
+    <div class="section-content">
+        <h2>⚡ Phase 2: Application Runtime</h2>
+        
+        <div class="phase-box" style="border-left-color: #3b82f6;">
+            <h3 style="color: #3b82f6;">User Interaction Flow</h3>
+            <ul>
+                <li><strong>Interface:</strong> ChatGPT-style web UI built with Flask</li>
+                <li><strong>User Input:</strong> Natural language medical questions</li>
+                <li><strong>Real-time processing:</strong> Immediate response generation</li>
+            </ul>
+        </div>
+        
+        <div class="phase-box" style="border-left-color: #3b82f6;">
+            <h3 style="color: #3b82f6;">Query Processing Pipeline</h3>
+            <ul>
+                <li><strong>Step 1:</strong> User question embedded using same HuggingFace model</li>
+                <li><strong>Step 2:</strong> Semantic search in Pinecone retrieves relevant medical context</li>
+                <li><strong>Step 3:</strong> LangChain combines query + retrieved context into optimized prompt</li>
+                <li><strong>Step 4:</strong> OpenAI GPT generates contextual response</li>
+                <li><strong>Step 5:</strong> Response displayed in chat interface</li>
+            </ul>
+        </div>
+        
+        <div class="result-box" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+            🚀 Launch: <code style="background: rgba(255,255,255,0.2); color: white;">python app.py</code> → Access at localhost:8080
+        </div>
     </div>
-    
-    <div class="phase-box" style="border-left-color: #3b82f6;">
-        <div class="phase-title" style="color: #3b82f6;">Query Processing Pipeline</div>
-        <ul>
-            <li><strong>Step 1:</strong> User question embedded using same HuggingFace model</li>
-            <li><strong>Step 2:</strong> Semantic search in Pinecone retrieves relevant medical context</li>
-            <li><strong>Step 3:</strong> LangChain combines query + retrieved context into optimized prompt</li>
-            <li><strong>Step 4:</strong> OpenAI GPT generates contextual response</li>
-            <li><strong>Step 5:</strong> Response displayed in chat interface</li>
-        </ul>
-    </div>
-    
-    <div class="result-box" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-        🚀 Launch: <code style="background: rgba(255,255,255,0.2);">python app.py</code> → Access at localhost:8080
-    </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
 </div>
 
-<!-- Slide 7: Phase 3 - AWS Deployment -->
-<div class="slide slide-white">
-    <div class="header">Implementation Details - Phase 3</div>
-    <h2>☁️ Phase 3: AWS Deployment (CI/CD)</h2>
-    
-    <div class="phase-box" style="border-left-color: #f59e0b;">
-        <div class="phase-title" style="color: #f59e0b;">1. Code Push → GitHub Actions Trigger</div>
-        <ul>
-            <li>Developer commits code to main branch</li>
-            <li>GitHub Actions workflow automatically starts</li>
-        </ul>
+<!-- Phase 3 -->
+<div class="section section-alt">
+    <div class="section-content">
+        <h2>☁️ Phase 3: AWS Deployment (CI/CD)</h2>
+        
+        <div class="phase-box" style="border-left-color: #f59e0b;">
+            <h3 style="color: #f59e0b;">1. Code Push → GitHub Actions Trigger</h3>
+            <ul>
+                <li>Developer commits code to main branch</li>
+                <li>GitHub Actions workflow automatically starts</li>
+            </ul>
+        </div>
+        
+        <div class="phase-box" style="border-left-color: #f59e0b;">
+            <h3 style="color: #f59e0b;">2. Docker Containerization</h3>
+            <ul>
+                <li>Workflow builds Docker image from Dockerfile</li>
+                <li>Includes all dependencies and application code</li>
+                <li>Creates portable, consistent environment</li>
+            </ul>
+        </div>
+        
+        <div class="phase-box" style="border-left-color: #f59e0b;">
+            <h3 style="color: #f59e0b;">3. Push to AWS ECR</h3>
+            <ul>
+                <li>Docker image uploaded to Elastic Container Registry</li>
+                <li>Stored securely in AWS cloud</li>
+                <li>ECR URI: <code>970547337635.dkr.ecr.ap-south-1.amazonaws.com/medicalchatbot</code></li>
+            </ul>
+        </div>
+        
+        <div class="phase-box" style="border-left-color: #f59e0b;">
+            <h3 style="color: #f59e0b;">4. Deploy to EC2</h3>
+            <ul>
+                <li>Self-hosted GitHub Actions runner on EC2 instance</li>
+                <li>Automatically pulls latest image from ECR</li>
+                <li>Runs Docker container → Application live!</li>
+            </ul>
+        </div>
     </div>
-    
-    <div class="phase-box" style="border-left-color: #f59e0b;">
-        <div class="phase-title" style="color: #f59e0b;">2. Docker Containerization</div>
-        <ul>
-            <li>Workflow builds Docker image from Dockerfile</li>
-            <li>Includes all dependencies and application code</li>
-            <li>Creates portable, consistent environment</li>
-        </ul>
-    </div>
-    
-    <div class="phase-box" style="border-left-color: #f59e0b;">
-        <div class="phase-title" style="color: #f59e0b;">3. Push to AWS ECR</div>
-        <ul>
-            <li>Docker image uploaded to Elastic Container Registry</li>
-            <li>Stored securely in AWS cloud</li>
-            <li>ECR URI: <code>970547337635.dkr.ecr.ap-south-1.amazonaws.com/medicalchatbot</code></li>
-        </ul>
-    </div>
-    
-    <div class="phase-box" style="border-left-color: #f59e0b;">
-        <div class="phase-title" style="color: #f59e0b;">4. Deploy to EC2</div>
-        <ul>
-            <li>Self-hosted GitHub Actions runner on EC2 instance</li>
-            <li>Automatically pulls latest image from ECR</li>
-            <li>Runs Docker container → Application live!</li>
-        </ul>
-    </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
 </div>
 
-<!-- Slide 8: Technical Configuration -->
-<div class="slide slide-white">
-    <div class="header">Technical Configuration</div>
-    <h2>⚙️ Configuration &amp; Setup</h2>
-    
-    <div class="content-box">
+<!-- Configuration -->
+<div class="section">
+    <div class="section-content">
+        <h2>⚙️ Technical Configuration</h2>
+        
         <h3>Required GitHub Secrets</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-            <div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+            <div style="background: #334155; padding: 20px; border-radius: 8px;">
                 <ul>
                     <li><code>AWS_ACCESS_KEY_ID</code></li>
                     <li><code>AWS_SECRET_ACCESS_KEY</code></li>
                     <li><code>AWS_DEFAULT_REGION</code></li>
                 </ul>
             </div>
-            <div>
+            <div style="background: #334155; padding: 20px; border-radius: 8px;">
                 <ul>
                     <li><code>ECR_REPO</code></li>
                     <li><code>PINECONE_API_KEY</code></li>
@@ -497,187 +663,116 @@
                 </ul>
             </div>
         </div>
-    </div>
-    
-    <div class="content-box">
-        <h3>AWS IAM Policies Required</h3>
-        <ul>
-            <li><code>AmazonEC2ContainerRegistryFullAccess</code> - For ECR operations</li>
-            <li><code>AmazonEC2FullAccess</code> - For EC2 instance management</li>
-        </ul>
-    </div>
-    
-    <div class="content-box">
+        
         <h3>Environment Setup Commands</h3>
-        <pre style="background: #1e293b; color: #10b981; padding: 20px; border-radius: 8px; overflow-x: auto;">conda create -n medibot python=3.10 -y
+        <pre>conda create -n medibot python=3.10 -y
 conda activate medibot
 pip install -r requirements.txt
 python store_index.py  # Create vector index
 python app.py          # Run application</pre>
     </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
 </div>
 
-<!-- Slide 9: Key Features & Benefits -->
-<div class="slide slide-white">
-    <div class="header">Key Features</div>
-    <h2>✨ Key Features &amp; Benefits</h2>
-    
-    <div class="content-box">
-        <h3>🎯 Technical Excellence</h3>
-        <ul>
-            <li><strong>RAG Architecture:</strong> Combines LLM power with verified medical knowledge</li>
-            <li><strong>Semantic Search:</strong> Intelligent context retrieval using vector embeddings</li>
-            <li><strong>Scalable Infrastructure:</strong> Cloud-native deployment on AWS</li>
-            <li><strong>Production-Ready:</strong> Dockerized, automated CI/CD pipeline</li>
-        </ul>
+<!-- Skills Demonstrated -->
+<div class="section section-alt">
+    <div class="section-content">
+        <h2>🎓 Skills Demonstrated for AI Lead Role</h2>
+        
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>AI/ML Engineering</h3>
+                <ul>
+                    <li>Production RAG system implementation</li>
+                    <li>Vector embeddings & semantic search</li>
+                    <li>LLM integration & prompt engineering</li>
+                    <li>NLP and transformer models expertise</li>
+                </ul>
+            </div>
+            
+            <div class="skill-card" style="border-left-color: #ec4899;">
+                <h3 style="color: #ec4899;">Cloud & DevOps</h3>
+                <ul>
+                    <li>AWS cloud infrastructure (EC2, ECR)</li>
+                    <li>Docker containerization</li>
+                    <li>CI/CD pipeline with GitHub Actions</li>
+                    <li>Infrastructure as Code practices</li>
+                </ul>
+            </div>
+            
+            <div class="skill-card" style="border-left-color: #06b6d4;">
+                <h3 style="color: #06b6d4;">Software Engineering</h3>
+                <ul>
+                    <li>Full-stack development</li>
+                    <li>API design and integration</li>
+                    <li>Clean code architecture</li>
+                    <li>Version control with Git/GitHub</li>
+                </ul>
+            </div>
+            
+            <div class="skill-card" style="border-left-color: #f59e0b;">
+                <h3 style="color: #f59e0b;">Leadership Qualities</h3>
+                <ul>
+                    <li>End-to-end project ownership</li>
+                    <li>Production-ready architecture</li>
+                    <li>Documentation & knowledge sharing</li>
+                    <li>Best practices implementation</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    
-    <div class="content-box">
-        <h3>💼 Business Value</h3>
-        <ul>
-            <li><strong>Accuracy:</strong> Responses grounded in actual documents, not hallucinations</li>
-            <li><strong>Maintainability:</strong> Easy to update knowledge base with new documents</li>
-            <li><strong>Scalability:</strong> Can handle multiple concurrent users</li>
-            <li><strong>Cost-Effective:</strong> Efficient use of OpenAI API with context limiting</li>
-        </ul>
-    </div>
-    
-    <div class="content-box">
-        <h3>🎨 User Experience</h3>
-        <ul>
-            <li><strong>Modern Interface:</strong> ChatGPT-style design for familiar UX</li>
-            <li><strong>Real-time Responses:</strong> Fast query processing and display</li>
-            <li><strong>Contextual Answers:</strong> Relevant, accurate medical information</li>
-        </ul>
-    </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
 </div>
 
-<!-- Slide 10: Demonstrated Skills -->
-<div class="slide slide-white">
-    <div class="header">Skills Demonstrated</div>
-    <h2>🎓 Skills Demonstrated for AI Lead Role</h2>
-    
-    <div class="phase-box" style="border-left-color: #8b5cf6;">
-        <div class="phase-title" style="color: #8b5cf6;">AI/ML Engineering</div>
-        <ul>
-            <li>Implemented production RAG (Retrieval-Augmented Generation) system</li>
-            <li>Vector embeddings and semantic search implementation</li>
-            <li>LLM integration and prompt engineering</li>
-            <li>Understanding of NLP and transformer models</li>
-        </ul>
-    </div>
-    
-    <div class="phase-box" style="border-left-color: #ec4899;">
-        <div class="phase-title" style="color: #ec4899;">Cloud &amp; DevOps</div>
-        <ul>
-            <li>AWS cloud infrastructure (EC2, ECR)</li>
-            <li>Docker containerization</li>
-            <li>CI/CD pipeline with GitHub Actions</li>
-            <li>Infrastructure as Code practices</li>
-        </ul>
-    </div>
-    
-    <div class="phase-box" style="border-left-color: #06b6d4;">
-        <div class="phase-title" style="color: #06b6d4;">Software Engineering</div>
-        <ul>
-            <li>Full-stack development (Python, Flask, JavaScript)</li>
-            <li>API design and integration</li>
-            <li>Clean code and project structure</li>
-            <li>Version control with Git/GitHub</li>
-        </ul>
-    </div>
-    
-    <div class="phase-box" style="border-left-color: #f59e0b;">
-        <div class="phase-title" style="color: #f59e0b;">Leadership Qualities</div>
-        <ul>
-            <li>End-to-end project ownership</li>
-            <li>Production-ready solution architecture</li>
-            <li>Documentation and knowledge sharing</li>
-            <li>Best practices implementation</li>
-        </ul>
-    </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
-</div>
-
-<!-- Slide 11: Project Results -->
-<div class="slide slide-white">
-    <div class="header">Results &amp; Outcomes</div>
-    <h2>📈 Project Results &amp; Impact</h2>
-    
-    <div class="result-box" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); margin-top: 40px;">
-        ✅ Fully Functional Medical Chatbot
-        <div style="font-size: 16px; margin-top: 10px; opacity: 0.9;">
-            Production-ready application deployed on AWS cloud
+<!-- Results -->
+<div class="section">
+    <div class="section-content">
+        <h2>📈 Project Results & Impact</h2>
+        
+        <div class="result-box" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+            ✅ Fully Functional Medical Chatbot
+            <div class="sub">Production-ready application deployed on AWS cloud</div>
         </div>
-    </div>
-    
-    <div class="result-box" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
-        ✅ Automated CI/CD Pipeline
-        <div style="font-size: 16px; margin-top: 10px; opacity: 0.9;">
-            Push-to-deploy workflow with GitHub Actions
+        
+        <div class="result-box" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+            ✅ Automated CI/CD Pipeline
+            <div class="sub">Push-to-deploy workflow with GitHub Actions</div>
         </div>
-    </div>
-    
-    <div class="result-box" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
-        ✅ Scalable RAG Architecture
-        <div style="font-size: 16px; margin-top: 10px; opacity: 0.9;">
-            Vector database with semantic search capabilities
+        
+        <div class="result-box" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+            ✅ Scalable RAG Architecture
+            <div class="sub">Vector database with semantic search capabilities</div>
         </div>
-    </div>
-    
-    <div class="result-box" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
-        ✅ Modern User Interface
-        <div style="font-size: 16px; margin-top: 10px; opacity: 0.9;">
-            ChatGPT-style design for optimal user experience
+        
+        <div class="result-box" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
+            ✅ Modern User Interface
+            <div class="sub">ChatGPT-style design for optimal user experience</div>
         </div>
-    </div>
-    
-    <div class="content-box" style="margin-top: 40px;">
-        <h3>🎯 Key Achievements</h3>
-        <ul>
+        
+        <h3 style="margin-top: 40px;">🎯 Key Achievements</h3>
+        <ul style="margin-left: 20px;">
             <li>Complete end-to-end AI solution from data to deployment</li>
             <li>Production-grade code quality and architecture</li>
             <li>Demonstrates full-stack AI engineering capabilities</li>
             <li>Ready for real-world medical information use cases</li>
         </ul>
     </div>
-    <div class="footer">Medical Chatbot GenAI | Mostafa M. Hussein</div>
 </div>
 
-<!-- Slide 12: Closing -->
-<div class="slide">
-    <div class="header">Contact Information</div>
-    <h1 style="font-size: 48px;">Thank You</h1>
-    <p class="subtitle" style="font-size: 22px;">Ready to discuss how I can contribute as an AI Lead</p>
+<!-- Footer -->
+<div class="footer">
+    <h2>Thank You</h2>
+    <p style="font-size: clamp(18px, 4vw, 22px); margin-bottom: 40px;">Ready to discuss how I can contribute as an AI Lead</p>
     
-    <div style="background: rgba(255,255,255,0.1); padding: 40px; border-radius: 15px; margin-top: 60px;">
-        <h3 style="color: white; font-size: 28px; margin-bottom: 30px;">📫 Contact Information</h3>
-        <p style="font-size: 20px; color: rgba(255,255,255,0.9); margin: 15px 0;">
-            📧 Email: mustafa.m.hussien@hotmail.com
-        </p>
-        <p style="font-size: 20px; color: rgba(255,255,255,0.9); margin: 15px 0;">
-            🔗 GitHub: github.com/MostafaMhussein
-        </p>
-        <p style="font-size: 20px; color: rgba(255,255,255,0.9); margin: 15px 0;">
-            💼 Project: github.com/MostafaMhussein/Medical-Chatbot-GenAI
-        </p>
+    <div class="contact-box">
+        <h3 style="color: #60a5fa; margin-bottom: 20px;">📫 Contact Information</h3>
+        <p>📧 Email: <a href="mailto:mustafa.m.hussien@hotmail.com">mustafa.m.hussien@hotmail.com</a></p>
+        <p>🔗 GitHub: <a href="https://github.com/MostafaMhussein" target="_blank">github.com/MostafaMhussein</a></p>
+        <p>💼 Project: <a href="https://github.com/MostafaMhussein/Medical-Chatbot-GenAI" target="_blank">github.com/MostafaMhussein/Medical-Chatbot-GenAI</a></p>
     </div>
     
-    <div style="margin-top: 60px; text-align: center;">
-        <p style="font-size: 18px; color: rgba(255,255,255,0.8);">
-            This project demonstrates my capability to lead AI initiatives from concept to production deployment
-        </p>
-    </div>
+    <p style="margin-top: 40px; font-size: clamp(14px, 3vw, 18px); color: #94a3b8;">
+        This project demonstrates my capability to lead AI initiatives from concept to production deployment
+    </p>
 </div>
 
-<script>
-    // Instructions for saving
-    window.onload = function() {
-        document.title = "Medical Chatbot GenAI - Mostafa M. Hussein";
-    }
-</script>
-
-
-</body></html>
+</body>
+</html>
