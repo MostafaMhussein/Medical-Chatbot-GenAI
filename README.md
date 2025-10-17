@@ -1,4 +1,7 @@
-# Build-a-Complete-Medical-Chatbot-with-LLMs-LangChain-Pinecone-Flask-AWS
+# Medical-Chatbot-GenAI
+
+# End-to-end-Medical-Chatbot-Generative-AI
+
 
 # How to run?
 ### STEPS:
@@ -6,7 +9,7 @@
 Clone the repository
 
 ```bash
-git clonehttps://github.com/entbappy/Build-a-Complete-Medical-Chatbot-with-LLMs-LangChain-Pinecone-Flask-AWS.git
+Project repo: https://github.com/
 ```
 ### STEP 01- Create a conda environment after opening the repository
 
@@ -21,7 +24,7 @@ conda activate medibot
 
 ### STEP 02- install the requirements
 ```bash
-pip install -r requirements.txt
+ 
 ```
 
 
@@ -58,7 +61,6 @@ open up localhost:
 - Pinecone
 
 
-
 # AWS-CICD-Deployment-with-Github-Actions
 
 ## 1. Login to AWS console.
@@ -92,7 +94,7 @@ open up localhost:
 
 	
 ## 3. Create ECR repo to store/save docker image
-    - Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/medicalbot
+    - Save the URI: 970547337635.dkr.ecr.ap-south-1.amazonaws.com/medicalchatbot
 
 	
 ## 4. Create EC2 machine (Ubuntu) 
@@ -128,3 +130,5 @@ open up localhost:
    - ECR_REPO
    - PINECONE_API_KEY
    - OPENAI_API_KEY
+
+    

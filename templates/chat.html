@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Chatbot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #343541;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #202123;
+            padding: 12px 20px;
+            border-bottom: 1px solid #4d4d4f;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+        }
+
+        .header-title {
+            color: #ececf1;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-wrapper {
+            width: 100%;
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .message-wrapper.bot {
+            background: #444654;
+        }
+
+        .message-wrapper.user {
+            background: #343541;
+        }
+
+        .message-content {
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            gap: 24px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .user-avatar {
+            background: #5436DA;
+            color: white;
+            font-size: 18px;
+        }
+
+        .message-text {
+            color: #ececf1;
+            line-height: 1.7;
+            font-size: 16px;
+            padding-top: 8px;
+        }
+
+        .input-container {
+            padding: 24px;
+            background: #343541;
+            display: flex;
+            justify-content: center;
+        }
+
+        .input-wrapper {
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+
+        .input-form {
+            display: flex;
+            background: #40414f;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-form:focus-within {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        #text {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 16px;
+            color: #ececf1;
+            font-size: 16px;
+            outline: none;
+            resize: none;
+            font-family: inherit;
+        }
+
+        #text::placeholder {
+            color: #8e8ea0;
+        }
+
+        .send-btn {
+            background: transparent;
+            border: none;
+            padding: 12px 16px;
+            color: #8e8ea0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .send-btn:hover {
+            color: #ececf1;
+        }
+
+        .send-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .send-btn i {
+            font-size: 18px;
+        }
+
+        .empty-state {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ececf1;
+            padding: 40px;
+        }
+
+        .empty-state img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        .empty-state h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            color: #8e8ea0;
+            font-size: 16px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #343541;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #565869;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6e6e80;
+        }
+
+        .typing-indicator {
+            display: inline-block;
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #8e8ea0;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" alt="Medical Bot">
+        <span class="header-title">Medical Chatbot</span>
+    </div>
+
+    <div class="chat-container" id="messageFormeight">
+        <div class="empty-state" id="emptyState">
+            <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" alt="Medical Bot">
+            <h1>Medical Chatbot</h1>
+            <p>Ask me anything about medical topics!</p>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <div class="input-wrapper">
+            <form id="messageArea" class="input-form">
+                <input 
+                    type="text" 
+                    id="text" 
+                    name="msg" 
+                    placeholder="Send a message..." 
+                    autocomplete="off" 
+                    required
+                />
+                <button type="submit" id="send" class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            function scrollToBottom() {
+                const container = document.getElementById('messageFormeight');
+                container.scrollTop = container.scrollHeight;
+            }
+
+            function hideEmptyState() {
+                $('#emptyState').hide();
+            }
+
+            function addMessage(text, isUser) {
+                hideEmptyState();
+                
+                const avatarContent = isUser 
+                    ? '<div class="user-avatar"><i class="fas fa-user"></i></div>'
+                    : '<img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" alt="Bot">';
+
+                const messageHtml = `
+                    <div class="message-wrapper ${isUser ? 'user' : 'bot'}">
+                        <div class="message-content">
+                            <div class="avatar">
+                                ${avatarContent}
+                            </div>
+                            <div class="message-text">${text}</div>
+                        </div>
+                    </div>
+                `;
+
+                $('#messageFormeight').append(messageHtml);
+                scrollToBottom();
+            }
+
+            function showTypingIndicator() {
+                const typingHtml = `
+                    <div class="message-wrapper bot" id="typingIndicator">
+                        <div class="message-content">
+                            <div class="avatar">
+                                <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" alt="Bot">
+                            </div>
+                            <div class="message-text">
+                                <div class="typing-indicator">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('#messageFormeight').append(typingHtml);
+                scrollToBottom();
+            }
+
+            function hideTypingIndicator() {
+                $('#typingIndicator').remove();
+            }
+
+            $("#messageArea").on("submit", function(event) {
+                event.preventDefault();
+                
+                var rawText = $("#text").val().trim();
+                if (!rawText) return;
+
+                // Add user message
+                addMessage(rawText, true);
+                $("#text").val("");
+
+                // Show typing indicator
+                showTypingIndicator();
+
+                // Send to Flask backend
+                $.ajax({
+                    data: { msg: rawText },
+                    type: "POST",
+                    url: "/get",
+                }).done(function(data) {
+                    hideTypingIndicator();
+                    addMessage(data, false);
+                }).fail(function() {
+                    hideTypingIndicator();
+                    addMessage("Sorry, I encountered an error. Please try again.", false);
+                });
+            });
+
+            // Auto-focus on input
+            $("#text").focus();
+        });
+    </script>
+</body>
+</html>
